@@ -19,6 +19,6 @@ jobs:
         docker login -u  $DOCKER_HUB_LOGIN -p $DOCKER_HUB_PW
         echo 'Running build'
         docker build . -f ./docker-action/dockerfile -t nighthusky
-        docker tag wondyframe wondyr/nighthusky
+        docker tag nighthusky wondyr/nighthusky
         echo 'Pushing image'
         docker push wondyr/nighthusky
