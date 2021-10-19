@@ -1,0 +1,26 @@
+{
+  "name": "nighthusky",
+  "version": "1.0.0",
+  "description": "Application for ic3husky's nightbot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sivertheisholt/NightHusky.git"
+  },
+  "author": "Sivert Heisholt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sivertheisholt/NightHusky/issues"
+  },
+  "homepage": "https://github.com/sivertheisholt/NightHusky#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.11",
+    "node-fetch": "^2.6.1",
+    "winston": "^3.3.3"
+  }
+}

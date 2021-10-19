@@ -1,0 +1,6 @@
+# action.yml
+name: 'NightHusky'
+description: 'Application end point for ic3husky's nightbot'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
