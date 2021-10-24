@@ -7,7 +7,7 @@ const logger = require('../logging/logger');
  */
 exports.connectToDatabase = async function(mongoose) {
     return mongoose
-        .connect(process.env.MONGO_DB_URL || "mongodb://localhost:27017/app", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+        .connect(process.env.MONGO_DB_URL || "mongodb://localhost:27017/husky", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
             .then((_) => {
                 logger.log({level: 'info', message: 'Successfully connected to database!'})
                 return true;
