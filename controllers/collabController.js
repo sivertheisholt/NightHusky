@@ -13,10 +13,12 @@ exports.collab_get = async function(req, res) {
 
 exports.collab_set = async function(req, res) {
     try {
+        logger.debug('Request received for setting collab');
         let people = req.query.collab.split(':');
         let stringPeople = 'ic3husky is currently playing with '
         let stringTwitch = 'you can find their content over at '
         for(let i = 0; i < people.length; i++){
+            if(people[i].length <= 1) continue;
             stringPeople += `${people[i]} `;
             if(people[i].indexOf('@')> -1) {
                 stringTwitch += `${i == 0 ? '' : ' | '}https://www.twitch.tv/${people[i].replace('@', '')}`
