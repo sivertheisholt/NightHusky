@@ -1,7 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 //Schema til quote
 const userSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
     username: {
         type: String,
         default: null
@@ -20,4 +24,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('user', userSchema);
+let model = mongoose.model('user', userSchema);
+
+export default model;

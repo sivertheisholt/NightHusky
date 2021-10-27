@@ -1,17 +1,16 @@
-const collabHandler = require('../database/collabHandler');
-const logger = require('../logging/logger');
+import {collab_db_set, collab_db_get} from '../database/collabHandler.js';
+import logger from '../logging/logger.js'
 
-//**** Movie *****/
-exports.collab_get = async function(req, res) {
+async function collab_get(req, res) {
     logger.info('Getting collab')
-    let collab = await collabHandler.collab_get();
+    let collab = await collab_db_get();
     if(!collab) {
         res.status(404).send('Something went wrong getting collab');
     }
     res.status(200).send(collab.collab);
 }
 
-exports.collab_set = async function(req, res) {
+async function collab_set(req, res) {
     try {
         logger.debug('Request received for setting collab');
         let people = req.query.collab.split(':');
@@ -24,9 +23,11 @@ exports.collab_set = async function(req, res) {
                 stringTwitch += `${i == 0 ? '' : ' | '}https://www.twitch.tv/${people[i].replace('@', '')}`
             }
         }
-        collabHandler.collab_set(req.query.setter, stringPeople + stringTwitch);
+        collab_db_set(req.query.setter, stringPeople + stringTwitch);
         res.status(200).send(`Thank you for updating the collab ${req.query.setter}!`);
     } catch(err) {
         res.status(400).send('Something went wrong setting collab');
     }
 }
+
+export {collab_get, collab_set}

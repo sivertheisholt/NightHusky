@@ -1,9 +1,11 @@
-require('dotenv').config();
-const http = require("http");
-const express = require("express");
-const mongoose = require('mongoose');
-const logger = require('./logging/logger');
-const start = require('./utils/initializer');
+import dotenv from 'dotenv';
+dotenv.config()
+import http from 'http';
+import express from 'express';
+import mongoose from 'mongoose';
+import logger from './logging/logger.js'
+import {configureLogger} from './logging/logger.js'
+import { startRouting, configureApp, connectToDatabase} from './utils/initializer.js';
 
 //Create object
 const app = express();
@@ -11,6 +13,8 @@ const app = express();
 const port = process.env.PORT || 2580;
 //"Creates" the server
 let server = http.createServer(app);
+//Configure logger
+configureLogger();
 
 /**
  * Starter og initialiserer systemer
@@ -19,14 +23,14 @@ let server = http.createServer(app);
 async function startSystems() {
   try {
     //Koble til database
-    await start.connectToDatabase(mongoose);
-    start.configureApp(app);
+    await connectToDatabase(mongoose);
+    configureApp(app);
   } catch(err) {
       logger.error(err);
       serverFailure();
   }
 
-  start.startRouting(app);
+  startRouting(app);
 
 
 

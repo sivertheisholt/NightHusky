@@ -1,11 +1,12 @@
-const logger = require('../logging/logger');
+import logger from '../logging/logger.js';
+import router from '../routing/index.js';
 
 /**
  * Kobler til databasen
  * @param {Object} mongoose Database objektet som skal kobles til 
  * @returns {Promise} 
  */
-exports.connectToDatabase = async function(mongoose) {
+async function connectToDatabase(mongoose) {
     return mongoose
         .connect(process.env.MONGO_DB_URL || "mongodb://localhost:27017/husky", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
             .then((_) => {
@@ -23,7 +24,7 @@ exports.connectToDatabase = async function(mongoose) {
  * @param {Object} app Express webserver applikasjonen
  * @returns {boolean}
  */
-exports.configureApp = function(app) {
+ function configureApp (app) {
     //Error handling
     app.use((err, req, res, next) => {
         res.send("Something wrong happen! Please try again later");
@@ -37,6 +38,8 @@ exports.configureApp = function(app) {
  * @param {Object} app Express webserver applikasjonen
  * @author Sivert - 233518
  */
-exports.startRouting = function(app) {
-    app.use(require('../routing/index'));
+function startRouting(app) {
+    app.use(router);
 }
+
+export { startRouting, configureApp, connectToDatabase}

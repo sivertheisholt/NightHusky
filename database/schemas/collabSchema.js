@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 //Schema til quote
 const collabSchema = new mongoose.Schema({
@@ -12,4 +12,6 @@ const collabSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('collab', collabSchema);
+let module = mongoose.model('collab', collabSchema);
+
+export default module;
