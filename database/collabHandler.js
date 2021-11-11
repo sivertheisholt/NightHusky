@@ -12,7 +12,7 @@ async function collab_db_get() {
 }
 
 async function collab_db_set(setter, collabs) {
-    let collab = await this.collab_get();
+    let collab = await collab_db_get();
     return collab.updateOne({setter: setter, collab: collabs}).then((doc, err) => {
         if(err) {
             throw new Error(err);
