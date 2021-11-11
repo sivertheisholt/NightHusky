@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from 'winston';
 
 /**
  * Lager customFormat
@@ -12,7 +12,9 @@ const customFormat = winston.format.printf(({level, message, timestamp}) => {
  * Lager en ny logger med vår egne instillinger
  * @author Sivert - 233518
  */
-const logger = winston.createLogger({
+let logger = winston.createLogger({
+    
+    
     level: 'info',
     format: winston.format.combine(
         winston.format.timestamp(),
@@ -24,14 +26,18 @@ const logger = winston.createLogger({
         new winston.transports.File({ filename: './logging/logs/combined.log' })]
 });
 
-//Logger om production environment
-if (process.env.NODE_ENV == 'production') {
-    logger.add(new winston.transports.Console({}));
-}
-//Logger om debug environment
-if(process.env.NODE_ENV == 'debug') {
-    logger.add(new winston.transports.File({ filename: './logging/logs/debug.log', level: 'debug'}))
-    logger.add(new winston.transports.Console({level: 'debug'}))
+function configureLogger() {
+    //Logger om production environment
+    if (process.env.NODE_ENV == 'production') {
+        logger.add(new winston.transports.Console({}));
+    }
+    //Logger om debug environment
+    if(process.env.NODE_ENV == 'debug') {
+        logger.add(new winston.transports.File({ filename: './logging/logs/debug.log', level: 'debug'}))
+        logger.add(new winston.transports.Console({level: 'debug'}))
+    }
 }
 
-module.exports = logger;
+export default logger;
+
+export {configureLogger}

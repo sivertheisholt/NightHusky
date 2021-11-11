@@ -1,7 +1,7 @@
-const logger = require('../logging/logger.js');
-const Collab = require('./schemas/collabSchema');
+import logger from '../logging/logger.js';
+import Collab from './schemas/collabSchema.js';
 
-exports.collab_get = async function() {
+async function collab_db_get() {
     let id;
     if(process.env.NODE_ENV == 'production') {
         id = '616ef346e4906a1ac5f3580b';
@@ -11,8 +11,8 @@ exports.collab_get = async function() {
     return await Collab.findOne({_id: id});
 }
 
-exports.collab_set = async function(setter, collabs) {
-    let collab = await this.collab_get();
+async function collab_db_set(setter, collabs) {
+    let collab = await collab_db_get();
     return collab.updateOne({setter: setter, collab: collabs}).then((doc, err) => {
         if(err) {
             throw new Error(err);
@@ -20,3 +20,5 @@ exports.collab_set = async function(setter, collabs) {
         return doc;
     })
 }
+
+export {collab_db_set, collab_db_get};

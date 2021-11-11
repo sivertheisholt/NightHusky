@@ -1,9 +1,10 @@
 /** Hoved routing
  * Her går alle routes gjennom
  */
- const express = require('express');
- const router = express.Router();
+import express from 'express';
+import collab from './collab.js';
+const router = express.Router();
 
- router.use("/collab", require('./collab'));
+router.use("/collab", collab);
  
- module.exports = router;
+export default router;

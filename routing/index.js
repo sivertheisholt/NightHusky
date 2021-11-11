@@ -2,10 +2,10 @@
  * Her routes valgt språk
  */
 
-const express = require('express');
+import express from 'express';
+import indexRouter from './indexRouter.js';
 const router = express.Router();
 
-router.use('/', require('./indexRouter'));
+router.use('/', indexRouter);
 
- 
-module.exports = router;
+export default router;
