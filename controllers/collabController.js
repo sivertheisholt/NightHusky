@@ -13,13 +13,15 @@ async function collab_get(req, res) {
 async function collab_set(req, res) {
     try {
         logger.info('Request received for setting collab');
-        let people = req.query.collab.split('+');
+        let people = req.query.collab.split('-');
         let stringPeople = 'ic3husky is currently playing with '
         let stringTwitch = 'you can find their content over at '
         for(let i = 0; i < people.length; i++){
             if(people[i].length <= 1) continue;
+            logger.debug(`Person: ${people[i]}`);
             stringPeople += `${people[i]} `;
             if(people[i].indexOf('@')> -1) {
+                logger.debug(`${i == 0 ? '' : ' | '}https://www.twitch.tv/${people[i].replace('@', '')}`);
                 stringTwitch += `${i == 0 ? '' : ' | '}https://www.twitch.tv/${people[i].replace('@', '')}`
             }
         }
