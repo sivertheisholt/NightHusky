@@ -12,7 +12,7 @@ async function collab_get(req, res) {
 
 async function collab_set(req, res) {
     try {
-        logger.debug('Request received for setting collab');
+        logger.info('Request received for setting collab');
         let people = req.query.collab.split(':');
         let stringPeople = 'ic3husky is currently playing with '
         let stringTwitch = 'you can find their content over at '
@@ -26,6 +26,7 @@ async function collab_set(req, res) {
         collab_db_set(req.query.setter, stringPeople + stringTwitch);
         res.status(200).send(`Thank you for updating the collab ${req.query.setter}!`);
     } catch(err) {
+        logger.error(err);
         res.status(400).send('Something went wrong setting collab');
     }
 }
