@@ -8,7 +8,7 @@ import router from '../routing/index.js';
  */
 async function connectToDatabase(mongoose) {
     return mongoose
-        .connect(process.env.MONGO_DB_URL || "mongodb://localhost:27017/husky", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+        .connect(process.env.MONGO_DB_URL || "mongodb://localhost:27017/husky", { useNewUrlParser: true, useUnifiedTopology: true })
             .then((_) => {
                 logger.log({level: 'info', message: 'Successfully connected to database!'})
                 return true;
