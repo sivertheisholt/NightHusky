@@ -1,5 +1,6 @@
 import {randomInteger} from '../utils/helperFunctions';
 import {userGetById} from '../database/userHandler';
+import logger from '../logging/logger';
 
 let cats = ['Tonkinese', 'Sokoke', 'Egyptian Mau', 'Forest Cat', 'Persian'];
 let catsChance = [1,2,2,3,3,3,3,4,4,4,4,4,5,5,5,5,5,5,5,5];
@@ -56,7 +57,8 @@ async function check_catched(catName, userId) {
         //If no cat is found, return false
         return false;
     } catch(err) {
-        throw new Error('Something wrong happen when getting user')
+        logger.error(err)
+        throw err;
     }
 }
 
